@@ -5,8 +5,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import firenh.enchantmentpower.EleanorsEnchantments;
-import firenh.enchantmentpower.registry.EEEnchantmentTags;
 import net.minecraft.core.Holder;
 import net.minecraft.world.item.enchantment.Enchantment;
 

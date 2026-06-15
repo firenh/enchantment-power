@@ -1,7 +1,6 @@
 package firenh.enchantmentpower.util;
 
-import firenh.enchantmentpower.EleanorsEnchantments;
-import firenh.enchantmentpower.registry.EEEnchantmentTags;
+import firenh.enchantmentpower.EnchantmentPower;
 import it.unimi.dsi.fastutil.objects.Object2IntMap.Entry;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
@@ -22,7 +21,7 @@ public class EnchantmentPowerUtil {
 
     public static int getEnchantmentLevels(ItemStack itemStack) {
         if (itemStack.is(Items.ENCHANTED_BOOK)) {
-            // EleanorsEnchantments.LOGGER.info("is enchanted book!");
+            // EnchantmentPower.LOGGER.info("is enchanted book!");
             return getEnchantmentLevels(itemStack.get(DataComponents.STORED_ENCHANTMENTS));
         }
 
@@ -32,7 +31,7 @@ public class EnchantmentPowerUtil {
 
     public static int getEnchantmentLevels(ItemStack itemStack, boolean abs) {
         if (itemStack.is(Items.ENCHANTED_BOOK)) {
-            // EleanorsEnchantments.LOGGER.info("is enchanted book!");
+            // EnchantmentPower.LOGGER.info("is enchanted book!");
             return getEnchantmentLevels(itemStack.get(DataComponents.STORED_ENCHANTMENTS), abs);
         }
 
@@ -70,7 +69,7 @@ public class EnchantmentPowerUtil {
 //        Optional<Identifier> optId = getId(enchantment);
 //
 //        if (optId.isPresent()) {
-//            var map = EleanorsEnchantments.getEnchantmentMaxPower();
+//            var map = EnchantmentPower.getEnchantmentMaxPower();
 //            if (map.containsKey(optId.get())) maxPower = map.get(optId.get());
 //        }
 

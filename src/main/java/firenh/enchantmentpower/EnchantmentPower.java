@@ -12,15 +12,15 @@ import net.fabricmc.api.ModInitializer;
 import net.minecraft.resources.Identifier;
 
 
-public class EleanorsEnchantments implements ModInitializer {
-	public static final String MODID = "eleanorsenchantments";
+public class EnchantmentPower implements ModInitializer {
+	public static final String MODID = "enchantmentpower";
     public static final Logger LOGGER = LoggerFactory.getLogger(MODID);
 	public static final String MOD_VERSION = "0.0.0";
-	private static Config config;
+//	private static Config config;
 
 	@Override
 	public void onInitialize() {
-		loadConfigFromFile();
+//		loadConfigFromFile();
 		ItemChecks.init();
 	}
 
@@ -38,20 +38,20 @@ public class EleanorsEnchantments implements ModInitializer {
 		LOGGER.info(info);
 	}
 
-	public static Config getConfig() {
-		if (Objects.isNull(config)) {
-			loadConfigFromFile();
-		}
+//	public static Config getConfig() {
+//		if (Objects.isNull(config)) {
+//			loadConfigFromFile();
+//		}
+//
+//		return config;
+//	}
 
-		return config;
-	}
-
-	public static void loadConfigFromFile() {
-		config = Config.init();
-		if (config.logWhenLoaded) LOGGER.info("Loaded config for " + MODID);
-	}
-
-	public static HashMap<Identifier, Integer> getEnchantmentMaxPower() {
-		return getConfig().enchantmentMaxPower;
-	}
+//	public static void loadConfigFromFile() {
+//		config = Config.init();
+//		if (config.logWhenLoaded) LOGGER.info("Loaded config for " + MODID);
+//	}
+//
+//	public static HashMap<Identifier, Integer> getEnchantmentMaxPower() {
+//		return getConfig().enchantmentMaxPower;
+//	}
 }

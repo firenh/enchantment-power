@@ -33,7 +33,7 @@ public class TooltipUtil {
     private static ChatFormatting getTooltipColor(int power, int maxPower, boolean cursesPresent) {
         if (power == maxPower) return ChatFormatting.DARK_PURPLE;
         if (power > maxPower) return ChatFormatting.LIGHT_PURPLE;
-        if (power < 0) return ChatFormatting.DARK_RED;
+        if (power <= 0) return ChatFormatting.DARK_RED;
         if (power > maxPower / 2) return ChatFormatting.BLUE;
         return ChatFormatting.GRAY;
     }

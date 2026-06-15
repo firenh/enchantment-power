@@ -1,16 +1,12 @@
 {
   "values": [
-    "minecraft:unbreaking",
-    "minecraft:respiration",
-    "minecraft:thorns",
-    "minecraft:bane_of_arthropods",
-    "minecraft:fire_aspect",
-    "minecraft:impaling",
-    "minecraft:knockback",
-    "minecraft:multishot",
-    "minecraft:piercing",
-    "minecraft:quick_charge",
-    "minecraft:luck_of_the_sea",
-    "minecraft:lure"
+    "minecraft:feather_falling",
+    "minecraft:protection",
+    "minecraft:density",
+    "minecraft:looting",
+    "minecraft:sharpness",
+    "minecraft:channeling",
+    "minecraft:infinity",
+    "minecraft:efficiency"
   ]
 }

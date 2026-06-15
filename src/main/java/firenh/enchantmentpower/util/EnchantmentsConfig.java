@@ -2,7 +2,7 @@ package firenh.enchantmentpower.util;
 
 import com.google.common.collect.Maps;
 import com.mojang.datafixers.util.Pair;
-import firenh.enchantmentpower.EleanorsEnchantments;
+import firenh.enchantmentpower.EnchantmentPower;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -81,7 +81,7 @@ public class EnchantmentsConfig {
     }
 
     private static Identifier id(String id) {
-        return EleanorsEnchantments.vid(id);
+        return EnchantmentPower.vid(id);
     }
 
     private static Pair<Identifier, Integer> of(String id, Integer i) {
