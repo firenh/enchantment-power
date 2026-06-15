@@ -1,0 +1,21 @@
+{
+	"required": true,
+	"package": "firenh.enchantmentpower.mixin",
+	"compatibilityLevel": "JAVA_25",
+	"mixins": [
+		"AnvilScreenHandlerAccessor",
+		"AnvilScreenHandlerMixin",
+		"EnchantmentHelperMixin",
+		"EnchantmentMixin",
+		"EnchantmentScreenHandlerMixin",
+		"ForgingScreenHandlerAccessor",
+		"ItemEnchantmentsComponentMixin",
+		"ItemStackMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}
