@@ -11,7 +11,7 @@ public class EPEnchantmentTags {
     public static final TagKey<Enchantment> INEXPENSIVE = of("power/inexpensive");
     public static final TagKey<Enchantment> DEFAULT = of("power/default");
     public static final TagKey<Enchantment> EXPENSIVE = of("power/expensive");
-    public static final TagKey<Enchantment> PREMIUM = of("power/premiumdestroys_cobwebs");
+    public static final TagKey<Enchantment> PREMIUM = of("power/premium");
 
     @SuppressWarnings("null")
     private static TagKey<Enchantment> of(String id) {

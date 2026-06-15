@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Objects;
 
 import firenh.enchantmentpower.polymer.itemcheck.ItemChecks;
-import firenh.enchantmentpower.util.Config;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

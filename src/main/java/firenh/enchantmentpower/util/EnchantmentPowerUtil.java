@@ -1,6 +1,7 @@
 package firenh.enchantmentpower.util;
 
 import firenh.enchantmentpower.EnchantmentPower;
+import firenh.enchantmentpower.registry.EPEnchantmentTags;
 import it.unimi.dsi.fastutil.objects.Object2IntMap.Entry;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
@@ -16,8 +17,13 @@ import net.minecraft.world.item.enchantment.ItemEnchantments;
 import java.util.Optional;
 
 public class EnchantmentPowerUtil {
-    public static final int LEVELS_FOR_MAX_ENCHANTMENT = 18;
-    public static final int MAX_LEVELS = 64;
+    public static final int CHEAP = 5;
+    public static final int INEXPENSIVE = 8;
+    public static final int DEFAULT = 10;
+    public static final int EXPENSIVE = 14;
+    public static final int PREMIUM = 18;
+
+    public static final int MAX_LEVELS = 40;
 
     public static int getEnchantmentLevels(ItemStack itemStack) {
         if (itemStack.is(Items.ENCHANTED_BOOK)) {
@@ -64,7 +70,7 @@ public class EnchantmentPowerUtil {
     @SuppressWarnings("null")
     public static int getEnchantmentLevels(Holder<Enchantment> enchantment, int level) {
         int x = -(level - enchantment.value().getMaxLevel());
-        int maxPower = LEVELS_FOR_MAX_ENCHANTMENT;
+        int maxPower = DEFAULT;
 
 //        Optional<Identifier> optId = getId(enchantment);
 //
@@ -73,7 +79,10 @@ public class EnchantmentPowerUtil {
 //            if (map.containsKey(optId.get())) maxPower = map.get(optId.get());
 //        }
 
-
+        if (enchantment.is(EPEnchantmentTags.CHEAP)) maxPower = CHEAP;
+        if (enchantment.is(EPEnchantmentTags.INEXPENSIVE)) maxPower = INEXPENSIVE;
+        if (enchantment.is(EPEnchantmentTags.EXPENSIVE)) maxPower = EXPENSIVE;
+        if (enchantment.is(EPEnchantmentTags.PREMIUM)) maxPower = PREMIUM;
 
         int levels = (int) Math.ceil((double) maxPower * Math.pow(2, -x));
         if (enchantment.is(EnchantmentTags.CURSE)) levels = -1 * levels;

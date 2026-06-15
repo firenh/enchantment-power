@@ -16,7 +16,7 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"firenh.enchantmentpower.EleanorsEnchantments"
+			"firenh.enchantmentpower.EnchantmentPower"
 		]
 	},
 	"mixins": [
