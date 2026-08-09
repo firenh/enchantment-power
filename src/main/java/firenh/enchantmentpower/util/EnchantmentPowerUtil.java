@@ -1,5 +1,6 @@
 package firenh.enchantmentpower.util;
 
+import com.mojang.datafixers.util.Pair;
 import firenh.enchantmentpower.EnchantmentPower;
 import firenh.enchantmentpower.registry.EPEnchantmentTags;
 import it.unimi.dsi.fastutil.objects.Object2IntMap.Entry;
@@ -25,31 +26,33 @@ public class EnchantmentPowerUtil {
 
     public static final int MAX_LEVELS = 40;
 
-    public static int getEnchantmentLevels(ItemStack itemStack) {
-        if (itemStack.is(Items.ENCHANTED_BOOK)) {
-            // EnchantmentPower.LOGGER.info("is enchanted book!");
-            return getEnchantmentLevels(itemStack.get(DataComponents.STORED_ENCHANTMENTS));
+    public static Pair<Integer, Integer> getEnchantmentLevels(ItemStack itemStack) {
+        return
+    }
+
+//    public static int getEnchantmentLevels(ItemStack itemStack, boolean abs) {
+//        if (itemStack.is(Items.ENCHANTED_BOOK)) {
+//            // EnchantmentPower.LOGGER.info("is enchanted book!");
+//            return getEnchantmentLevels(itemStack.get(DataComponents.STORED_ENCHANTMENTS), abs);
+//        }
+//
+//        if (!itemStack.isEnchanted()) return -1;
+//        return getEnchantmentLevels(EnchantmentHelper.getEnchantmentsForCrafting(itemStack), abs);
+//    }
+
+    public static Pair<Integer, Integer> getEnchantmentPower(ItemStack itemStack, boolean abs) {
+        if (!itemStack.isEnchanted()) {
+            return new Pair<>(0, 0);
         }
 
-        if (!itemStack.isEnchanted()) return -1;
-        return getEnchantmentLevels(EnchantmentHelper.getEnchantmentsForCrafting(itemStack));
-    }
+        ItemEnchantments component = null;
 
-    public static int getEnchantmentLevels(ItemStack itemStack, boolean abs) {
-        if (itemStack.is(Items.ENCHANTED_BOOK)) {
-            // EnchantmentPower.LOGGER.info("is enchanted book!");
-            return getEnchantmentLevels(itemStack.get(DataComponents.STORED_ENCHANTMENTS), abs);
+        if (itemStack.has(DataComponents.STORED_ENCHANTMENTS)) {
+            component = itemStack.get(DataComponents.STORED_ENCHANTMENTS);
+        } else {
+            component = itemStack.getEnchantments();
         }
 
-        if (!itemStack.isEnchanted()) return -1;
-        return getEnchantmentLevels(EnchantmentHelper.getEnchantmentsForCrafting(itemStack), abs);
-    }
-
-    public static int getEnchantmentLevels(ItemEnchantments component) {
-        return getEnchantmentLevels(component, false);
-    }
-
-    public static int getEnchantmentLevels(ItemEnchantments component, boolean abs) {
         int power = 0;
 
         if (!abs) {
@@ -62,14 +65,13 @@ public class EnchantmentPowerUtil {
             }
         }
 
-
-
-        return power;
+        return new Pair<>(power, 40);
     }
 
     @SuppressWarnings("null")
     public static int getEnchantmentLevels(Holder<Enchantment> enchantment, int level) {
-        int x = -(level - enchantment.value().getMaxLevel());
+        int maxLvl = enchantment.value().getMaxLevel();
+//        int x = -(level - enchantment.value().getMaxLevel());
         int maxPower = DEFAULT;
 
 //        Optional<Identifier> optId = getId(enchantment);
@@ -84,9 +86,11 @@ public class EnchantmentPowerUtil {
         if (enchantment.is(EPEnchantmentTags.EXPENSIVE)) maxPower = EXPENSIVE;
         if (enchantment.is(EPEnchantmentTags.PREMIUM)) maxPower = PREMIUM;
 
-        int levels = (int) Math.ceil((double) maxPower * Math.pow(2, -x));
+//        int levels = (int) Math.ceil((double) maxPower * Math.pow(2, -x));
+
+        double levels = Math.ceil(level * ((double)maxPower / ((double) maxLvl)));
         if (enchantment.is(EnchantmentTags.CURSE)) levels = -1 * levels;
-        return levels;
+        return (int) levels;
     }
 
     public static int getMaxLevels() {
