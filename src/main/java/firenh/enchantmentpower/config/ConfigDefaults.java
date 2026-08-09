@@ -1,25 +1,22 @@
-package firenh.enchantmentpower.util;
+package firenh.enchantmentpower.config;
 
-import com.google.common.collect.Maps;
 import com.mojang.datafixers.util.Pair;
 import firenh.enchantmentpower.EnchantmentPower;
-import net.minecraft.core.Holder;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.item.enchantment.Enchantment;
 import org.jspecify.annotations.NonNull;
 
 import java.util.HashMap;
 
-public class EnchantmentsConfig {
-    public static final int CHEAP = 9;
-    public static final int INEXPENSIVE = 14;
-    public static final int DEFAULT = 18;
-    public static final int EXPENSIVE = 22;
-    public static final int PREMIUM = 28;
+public class ConfigDefaults {
+    public static final int CHEAP = 5;
+    public static final int INEXPENSIVE = 8;
+    public static final int DEFAULT = 10;
+    public static final int EXPENSIVE = 14;
+    public static final int PREMIUM = 18;
 
 
-    public static HashMap<Identifier, Integer> getDefaultConfig() {
-        HashMap<Identifier, Integer> map = new HashMap<>();
+    public static HashMap<String, Integer> getDefaultEnchantmentConfig() {
+        HashMap<String, Integer> map = new HashMap<>();
 
         put(map,
 
@@ -54,7 +51,7 @@ public class EnchantmentsConfig {
                 of("knockback", INEXPENSIVE),
                 of("sharpness", EXPENSIVE),
                 of("smite", DEFAULT),
-                of("sweeping_edge", DEFAULT),
+                of("sweeping_edge", CHEAP),
                 of("wind_burst", DEFAULT),
 
             //  Ranged
@@ -80,17 +77,27 @@ public class EnchantmentsConfig {
         return map;
     }
 
+//    public static HashMap<Identifier, Integer> getDefaultEnchantmentConfig() {
+//        HashMap<Identifier, Integer> map = new HashMap<>();
+//
+////        put ?
+//
+//
+//
+//        return map;
+//    }
+
     private static Identifier id(String id) {
         return EnchantmentPower.vid(id);
     }
 
-    private static Pair<Identifier, Integer> of(String id, Integer i) {
-        return new Pair<>(id(id), i);
+    private static Pair<String, Integer> of(String id, Integer i) {
+        return new Pair<String, Integer>(id, i);
     }
 
-    private static void put(HashMap<Identifier, Integer> map, @NonNull Pair<Identifier, Integer>... pairs) {
+    private static void put(HashMap<String, Integer> map, @NonNull Pair<String, Integer>... pairs) {
 
-        for (Pair<Identifier, Integer> p : pairs) {
+        for (Pair<String, Integer> p : pairs) {
             map.put(p.getFirst(), p.getSecond());
         }
 

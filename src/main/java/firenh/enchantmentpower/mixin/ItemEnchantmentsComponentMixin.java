@@ -16,9 +16,9 @@ import firenh.enchantmentpower.util.TooltipUtil;
 
 @Mixin(ItemEnchantments.class)
 public class ItemEnchantmentsComponentMixin {
-    @Inject(at = @At("RETURN"), method = "addToTooltip")
-    public void appendTooltip(final Item.TooltipContext context, final Consumer<Component> consumer, final TooltipFlag flag, final DataComponentGetter components, CallbackInfo info) {
-        TooltipUtil.appendTooltip((ItemEnchantments)(Object)this, context, consumer);
-    }
+//    @Inject(at = @At("RETURN"), method = "addToTooltip")
+//    public void appendTooltip(final Item.TooltipContext context, final Consumer<Component> consumer, final TooltipFlag flag, final DataComponentGetter components, CallbackInfo info) {
+//        TooltipUtil.appendTooltip((ItemEnchantments)(Object)this, context, consumer);
+//    }
 
 }

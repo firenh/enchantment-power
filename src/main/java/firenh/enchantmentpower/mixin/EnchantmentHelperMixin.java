@@ -19,6 +19,6 @@ import firenh.enchantmentpower.util.EnchantingUtil;
 public class EnchantmentHelperMixin {
     @Inject(at = @At("RETURN"), method = "selectEnchantment", cancellable = true)
     private static void generateEnchantments(RandomSource random, ItemStack stack, int level, Stream<Holder<Enchantment>> possibleEnchantments, CallbackInfoReturnable<List<EnchantmentInstance>> info) {
-        info.setReturnValue(EnchantingUtil.generateEnchantments(info.getReturnValue(), level));
+        info.setReturnValue(EnchantingUtil.generateEnchantments(info.getReturnValue(), level, stack));
     }
 }

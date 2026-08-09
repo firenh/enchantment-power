@@ -16,6 +16,6 @@ import firenh.enchantmentpower.util.EnchantingUtil;
 public class EnchantmentScreenHandlerMixin {
     @Inject(at = @At("RETURN"), method = "getEnchantmentList", cancellable = true)
     private void generateEnchantments(RegistryAccess registryManager, ItemStack stack, int slot, int level, CallbackInfoReturnable<List<EnchantmentInstance>> info) {
-        info.setReturnValue(EnchantingUtil.generateEnchantments(info.getReturnValue(), level));
+        info.setReturnValue(EnchantingUtil.generateEnchantments(info.getReturnValue(), level, stack));
     }
 }

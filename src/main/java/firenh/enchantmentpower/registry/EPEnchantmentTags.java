@@ -1,20 +1,61 @@
 package firenh.enchantmentpower.registry;
 
+import com.mojang.datafixers.util.Pair;
 import firenh.enchantmentpower.EnchantmentPower;
 import firenh.enchantmentpower.EnchantmentPower;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantment;
 
+import java.util.HashMap;
+
 public class EPEnchantmentTags {
-    public static final TagKey<Enchantment> CHEAP = of("power/cheap");
-    public static final TagKey<Enchantment> INEXPENSIVE = of("power/inexpensive");
-    public static final TagKey<Enchantment> DEFAULT = of("power/default");
-    public static final TagKey<Enchantment> EXPENSIVE = of("power/expensive");
-    public static final TagKey<Enchantment> PREMIUM = of("power/premium");
+    public static HashMap<Integer, TagKey<Enchantment>> enchantmentKeys = new HashMap<>();
+    public static HashMap<Integer, TagKey<Item>> itemKeys = new HashMap<>();
+
+    public static TagKey<Enchantment> getEnchantmentTag(int i) {
+        if (enchantmentKeys.containsKey(i)) {
+            return enchantmentKeys.get(i);
+        }
+
+        TagKey<Enchantment> tag = eof(tagPath("cost/cost_", i));
+        enchantmentKeys.put(i, tag);
+
+//        EnchantmentPower.log("Tag: " + tag.toString());
+
+
+        return tag;
+
+    }
+
+    public static TagKey<Item> getItemTag(int i) {
+        if (itemKeys.containsKey(i)) {
+            return itemKeys.get(i);
+        }
+
+        TagKey<Item> tag = iof(tagPath("cap/cap_", i));
+        itemKeys.put(i, tag);
+
+        return tag;
+    }
+
+    public static String tagPath(String path, int i) {
+        return path + i;
+    }
+
+    public static final TagKey<Enchantment> INEXPENSIVE = eof("power/inexpensive");
+    public static final TagKey<Enchantment> DEFAULT = eof("power/default");
+    public static final TagKey<Enchantment> EXPENSIVE = eof("power/expensive");
+    public static final TagKey<Enchantment> PREMIUM = eof("power/premium");
 
     @SuppressWarnings("null")
-    private static TagKey<Enchantment> of(String id) {
+    private static TagKey<Enchantment> eof(String id) {
         return TagKey.create(Registries.ENCHANTMENT, EnchantmentPower.id(id));
+    }
+
+    private static TagKey<Item> iof(String id) {
+        return TagKey.create(Registries.ITEM, EnchantmentPower.id(id));
     }
 }

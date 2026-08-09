@@ -1,0 +1,10 @@
+{
+    "values": [
+        "#enchantmentpower:tiers/netherite",
+        "#enchantmentpower:tiers/iron",
+        "minecraft:trident",
+        "minecraft:mace",
+        "minecraft:bow",
+        "minecraft:crossbow"
+    ]
+}

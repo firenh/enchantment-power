@@ -10,7 +10,8 @@
 		"EnchantmentScreenHandlerMixin",
 		"ForgingScreenHandlerAccessor",
 		"ItemEnchantmentsComponentMixin",
-		"ItemStackMixin"
+		"ItemStackMixin",
+		"LootItemFunctionsMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
