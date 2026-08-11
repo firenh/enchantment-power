@@ -45,11 +45,6 @@ public class EPEnchantmentTags {
         return path + i;
     }
 
-    public static final TagKey<Enchantment> INEXPENSIVE = eof("power/inexpensive");
-    public static final TagKey<Enchantment> DEFAULT = eof("power/default");
-    public static final TagKey<Enchantment> EXPENSIVE = eof("power/expensive");
-    public static final TagKey<Enchantment> PREMIUM = eof("power/premium");
-
     @SuppressWarnings("null")
     private static TagKey<Enchantment> eof(String id) {
         return TagKey.create(Registries.ENCHANTMENT, EnchantmentPower.id(id));

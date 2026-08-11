@@ -1,0 +1,37 @@
+{
+    "type": "minecraft:empty",
+    "pools": [
+        {
+            "rolls": 1,
+            "entries": [
+                {
+                    "type": "minecraft:loot_table",
+                    "value": "enchantmentpower:util/tiers/diamond",
+                    "weight": 4
+                },
+                {
+                    "type": "minecraft:loot_table",
+                    "value": "enchantmentpower:util/tiers/netherite",
+                    "weight":  4
+                },
+                {
+                    "type": "minecraft:loot_table",
+                    "value": "enchantmentpower:util/tiers/bow",
+                    "weight":  1
+                }
+            ],
+            "functions": [
+                {
+                    "function": "enchantmentpower:overenchant",
+                    "total_overenchantments": {
+                        "type": "minecraft:uniform",
+                        "min": 1,
+                        "max": 2
+                    },
+                    "enchantments": "#minecraft:in_enchanting_table"
+                }
+            ]
+        }
+    ],
+    "functions": []
+}

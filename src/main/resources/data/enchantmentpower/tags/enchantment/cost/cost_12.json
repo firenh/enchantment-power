@@ -1,9 +1,6 @@
 {
     "values": [
         "minecraft:looting",
-        "minecraft:fire_protection",
-        "minecraft:projectile_protection",
-        "minecraft:blast_protection",
         "minecraft:feather_falling",
         "minecraft:infinity",
         "minecraft:riptide"

@@ -1,0 +1,80 @@
+package firenh.enchantmentpower.loot;
+
+import firenh.enchantmentpower.EnchantmentPower;
+import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
+import net.fabricmc.fabric.api.loot.v3.LootTableSource;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.entries.NestedLootTable;
+import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
+
+public class EPLootTables {
+    public static final ResourceKey<LootTable> OVERENCHANTED_NORMAL = customLootTable("util/overenchanted_normal");
+    public static final ResourceKey<LootTable>  OVERENCHANTED_NETHERITE = customLootTable("util/overenchanted_netherite");
+    public static final ResourceKey<LootTable>  OVERENCHANTED_TRIDENT = customLootTable("util/overenchanted_trident");
+
+    public static void init() {
+        addToLootTable("chests/abandoned_mineshaft", OVERENCHANTED_NORMAL, 0.018f);
+        addToLootTable("chests/ruined_portal", OVERENCHANTED_NETHERITE, 0.008f);
+        addToLootTable("chests/desert_pyramid", OVERENCHANTED_NORMAL, 0.024f);
+        addToLootTable("chests/simple_dungeon", OVERENCHANTED_TRIDENT, 0.028f);
+        addToLootTable("chests/woodland_mansion", OVERENCHANTED_NORMAL, 0.037f);
+        addToLootTable("chests/bastion_treasure", OVERENCHANTED_NETHERITE, 0.1f);
+        addToLootTable("chests/bastion_bridge", OVERENCHANTED_NETHERITE, 0.015f);
+        addToLootTable("chests/bastion_other", OVERENCHANTED_NETHERITE, 0.015f);
+        addToLootTable("chests/bastion_hoglin_stable", OVERENCHANTED_NETHERITE, 0.015f);
+        addToLootTable("chests/ancient_city", OVERENCHANTED_NETHERITE, 0.08f);
+        addToLootTable("chests/trial_chambers/reward_ominous", OVERENCHANTED_TRIDENT, 0.225f);
+        addToLootTable("chests/trial_chambers/reward", OVERENCHANTED_TRIDENT, 0.01f);
+
+        addToLootTable("chests/buried_treasure", OVERENCHANTED_TRIDENT, 0.018f);
+        addToLootTable("chests/jungle_temple", OVERENCHANTED_NORMAL, 0.01f);
+        addToLootTable("chests/nether_bridge", OVERENCHANTED_NETHERITE, 0.05f);
+        addToLootTable("chests/pillager_outpost", OVERENCHANTED_NORMAL, 0.05f);
+        addToLootTable("chests/stronghold_corridor", OVERENCHANTED_NORMAL, 0.0875f);
+        addToLootTable("chests/stronghold_corridor", OVERENCHANTED_TRIDENT, 0.0875f);
+        addToLootTable("chests/stronghold_corridor", OVERENCHANTED_TRIDENT, 0.0875f);
+        addToLootTable("chests/stronghold_corridor", OVERENCHANTED_TRIDENT, 0.0875f);
+
+        addToPool("archaeology/trail_ruins_rare", OVERENCHANTED_TRIDENT, 1);
+
+    }
+
+    private static void addToLootTable(String targetTable, ResourceKey<LootTable> addedTable, float chance) {
+        LootTableEvents.MODIFY.register((key, tableBuilder, source, holder) -> {
+            if (key.identifier().equals(EnchantmentPower.vid(targetTable)) && source.isBuiltin()) {
+                LootPool.Builder pool = LootPool.lootPool()
+                        .add(NestedLootTable.lootTableReference(addedTable))
+                        .when(LootItemRandomChanceCondition.randomChance(chance));
+                tableBuilder.withPool(pool);
+            }
+        });
+    }
+
+    private static void addToPool(String targetTable, ResourceKey<LootTable> addedTable, int weight) {
+        LootTableEvents.MODIFY.register((key, tableBuilder, source, holder) -> {
+            if (key.identifier().equals(EnchantmentPower.vid(targetTable)) && source.isBuiltin()) {
+                tableBuilder.modifyPools(pool -> {
+                    pool.add(NestedLootTable.lootTableReference(addedTable).setWeight(weight));
+                });
+            }
+        });
+    }
+
+    private static ResourceKey<LootTable> customLootTable(String id) {
+        return lootTableKey(EnchantmentPower.id(id));
+    }
+
+    private static ResourceKey<LootTable> vanillaId(String id) {
+        return lootTableKey(EnchantmentPower.vid(id));
+    }
+
+    private static ResourceKey<LootTable> lootTableKey(Identifier id) {
+        return ResourceKey.create(Registries.LOOT_TABLE, id);
+    }
+}

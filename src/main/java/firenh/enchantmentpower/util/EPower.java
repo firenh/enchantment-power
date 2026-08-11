@@ -37,6 +37,7 @@ public class EPower {
         return (stack.isEnchanted() || stack.has(DataComponents.STORED_ENCHANTMENTS));
     }
 
+
     public static EPower get(ItemStack itemStack) {
         if (!hasEnchantments(itemStack)) {
             return new EPower(0, 0, false);

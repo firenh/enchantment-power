@@ -2,6 +2,9 @@
     "values": [
         "minecraft:piercing",
         "minecraft:fire_aspect",
-        "minecraft:breach"
+        "minecraft:breach",
+        "minecraft:fire_protection",
+        "minecraft:projectile_protection",
+        "minecraft:blast_protection"
     ]
 }

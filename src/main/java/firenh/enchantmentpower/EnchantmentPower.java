@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import firenh.enchantmentpower.config.ConfigGetter;
+import firenh.enchantmentpower.loot.EPLootTables;
 import firenh.enchantmentpower.polymer.itemcheck.ItemChecks;
 import firenh.enchantmentpower.config.EPConfig;
 import org.slf4j.Logger;
@@ -22,8 +23,9 @@ public class EnchantmentPower implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		loadConfigFromFile();
+//		loadConfigFromFile();
 		ItemChecks.init();
+		EPLootTables.init();
 
 //		log("h: " + ConfigGetter.getMaxPower(vid("sharpness")));
 	}
