@@ -15,4 +15,6 @@ public interface AnvilScreenHandlerAccessor {
     
     @Accessor("repairItemCountCost")
     public void setRepairItemCountCost(int repairItemUsage);
+
+
 }
