@@ -3,8 +3,7 @@
         "minecraft:piercing",
         "minecraft:fire_aspect",
         "minecraft:breach",
-        "minecraft:fire_protection",
-        "minecraft:projectile_protection",
-        "minecraft:blast_protection"
+        "#enchantmentpower:compatibility/specialized_protections",
+        "minecraft:feather_falling"
     ]
 }

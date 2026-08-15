@@ -2,7 +2,6 @@
     "values": [
         "#minecraft:in_enchanting_table",
         "minecraft:frost_walker",
-        "minecraft:wind_burst",
-        "minecraft:soul_speed"
+        "minecraft:wind_burst"
     ]
 }

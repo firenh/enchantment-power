@@ -1,8 +1,6 @@
 {
     "values": [
-        "minecraft:protection"
-
-
-
+        "minecraft:mending",
+        "#enchantmentpower:compatibility/protection"
     ]
 }

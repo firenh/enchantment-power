@@ -14,7 +14,7 @@ public class ItemModification {
          (original, client, player) -> {
              if (hasEnchantments(original)) {
                  client.setCount(3);
-                 client.update(DataComponents.LORE, ItemLore.EMPTY.withLineAdded(Component.nullToEmpty("h")), null);
+                 client.update(DataComponents.LORE, ItemLore.EMPTY.withLineAdded(Component.nullToEmpty("h")), t -> t);
              }
              return Items.DIAMOND.getDefaultInstance();
          }

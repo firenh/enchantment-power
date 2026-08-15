@@ -15,6 +15,8 @@ public class EPEnchantmentTags {
     public static HashMap<Integer, TagKey<Enchantment>> enchantmentKeys = new HashMap<>();
     public static HashMap<Integer, TagKey<Item>> itemKeys = new HashMap<>();
 
+    public static final TagKey<Enchantment> NEVER_EXCEED_MAX_LEVEL = eof("never_exceed_max_level");
+
     public static TagKey<Enchantment> getEnchantmentTag(int i) {
         if (enchantmentKeys.containsKey(i)) {
             return enchantmentKeys.get(i);

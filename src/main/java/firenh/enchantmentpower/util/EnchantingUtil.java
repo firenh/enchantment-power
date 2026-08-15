@@ -2,11 +2,13 @@ package firenh.enchantmentpower.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Stream;
 
 import com.mojang.datafixers.util.Pair;
 import firenh.enchantmentpower.EnchantmentPower;
+import firenh.enchantmentpower.registry.EPEnchantmentTags;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
@@ -53,6 +55,19 @@ public class EnchantingUtil {
         }
 
         return newList;
+    }
+
+    public static boolean hasOverenchantments(ItemStack stack) {
+        ItemEnchantments enchantments = stack.get(EnchantmentHelper.getComponentType(stack));
+        if (Objects.isNull(enchantments)) return false;
+
+        for (var e : enchantments.entrySet()) {
+            if (e.getIntValue() > e.getKey().value().getMaxLevel()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public static ItemStack overenchant(final RandomSource random, ItemStack itemStack, HolderSet<Enchantment> enchantments, int overEnchantments) {
@@ -109,7 +124,7 @@ public class EnchantingUtil {
 
             int level;
 
-            if (currentOverEnchants < overEnchantments && enchantment.getMaxLevel() > 1) {
+            if (currentOverEnchants < overEnchantments && enchantment.getMaxLevel() > 1 && !enchHolder.is(EPEnchantmentTags.NEVER_EXCEED_MAX_LEVEL)) {
                 level = enchantment.getMaxLevel() + 1;
                 currentOverEnchants += 1;
             } else {

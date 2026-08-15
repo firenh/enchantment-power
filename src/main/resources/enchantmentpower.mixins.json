@@ -11,9 +11,7 @@
 		"ForgingScreenHandlerAccessor",
 		"ItemEnchantmentsComponentMixin",
 		"ItemStackMixin",
-		"LootItemFunctionsMixin",
-		"GrindstoneMenuAccessor",
-		"GrindstoneMenuMixin"
+		"LootItemFunctionsMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

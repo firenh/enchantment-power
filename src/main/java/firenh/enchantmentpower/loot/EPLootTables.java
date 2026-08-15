@@ -31,12 +31,12 @@ public class EPLootTables {
         addToLootTable("chests/bastion_other", OVERENCHANTED_NETHERITE, 0.065f);
         addToLootTable("chests/bastion_hoglin_stable", OVERENCHANTED_NETHERITE, 0.065f);
         addToLootTable("chests/bastion_bridge", OVERENCHANTED_NETHERITE, 0.65f);
-        addToLootTable("chests/woodland_mansion", OVERENCHANTED_NORMAL, 0.08f);
-        addToLootTable("chests/stronghold_corridor", OVERENCHANTED_NORMAL, 0.0875f);
-        addToLootTable("chests/stronghold_crossing", OVERENCHANTED_NORMAL, 0.0875f);
         addToLootTable("chests/ancient_city", OVERENCHANTED_NETHERITE, 0.125f);
         addToLootTable("chests/end_city_treasure", OVERENCHANTED_NORMAL, 0.175f);
         addToLootTable("chests/trial_chambers/reward_ominous", OVERENCHANTED_TRIDENT, 0.275f);
+        addToLootTable("chests/woodland_mansion", OVERENCHANTED_NORMAL, 0.275f);
+        addToLootTable("chests/stronghold_corridor", OVERENCHANTED_NORMAL, 0.275f);
+        addToLootTable("chests/stronghold_crossing", OVERENCHANTED_NORMAL, 0.5f);
         addToLootTable("chests/bastion_treasure", OVERENCHANTED_NETHERITE, 0.5f);
 
         addToPool("archaeology/trail_ruins_rare", OVERENCHANTED_TRIDENT, 1);

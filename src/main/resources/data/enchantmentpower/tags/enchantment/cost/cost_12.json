@@ -1,10 +1,9 @@
 {
     "values": [
         "minecraft:looting",
-        "minecraft:feather_falling",
         "minecraft:infinity",
-        "minecraft:riptide"
-
-        
+        "minecraft:riptide",
+        "minecraft:fortune",
+        "minecraft:vanishing_curse"
     ]
 }

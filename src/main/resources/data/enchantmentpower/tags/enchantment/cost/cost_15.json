@@ -1,12 +1,7 @@
 {
     "values": [
         "minecraft:sharpness",
-        "minecraft:fortune",
         "minecraft:power",
         "minecraft:binding_curse"
-
-
-
-
     ]
 }
