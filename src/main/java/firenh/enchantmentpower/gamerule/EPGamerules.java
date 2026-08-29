@@ -1,6 +1,7 @@
 package firenh.enchantmentpower.gamerule;
 
 import com.mojang.brigadier.arguments.ArgumentType;
+import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.serialization.Codec;
 import firenh.enchantmentpower.EnchantmentPower;
@@ -27,6 +28,15 @@ public class EPGamerules {
             0,
             1000
     );
+
+    public static GameRule<Boolean> REROLL_ENCHANTMENTS_WHEN_SLOTS_REFRESHED = registerBoolean("reroll_enchantments_when_slots_refreshed",
+            GameRuleCategory.PLAYER,
+            true
+    );
+
+    private static GameRule<Boolean> registerBoolean(final String id, final GameRuleCategory category, final boolean defaultValue) {
+        return register(id, category, GameRuleType.BOOL, BoolArgumentType.bool(), Codec.BOOL, defaultValue, FeatureFlagSet.of(), GameRuleTypeVisitor::visitBoolean, o -> o ? 1 : 0);
+    }
 
     private static GameRule<Integer> registerInteger(final String id, final GameRuleCategory category, final int defaultValue, final int min, final int max) {
         return register(id, category, GameRuleType.INT, IntegerArgumentType.integer(min, max), Codec.intRange(min, max), defaultValue, FeatureFlagSet.of(), GameRuleTypeVisitor::visitInteger, (i) -> i);
