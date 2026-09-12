@@ -1,7 +1,11 @@
 package firenh.enchantmentpower.loot;
 
 import firenh.enchantmentpower.EnchantmentPower;
+import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
@@ -43,10 +47,10 @@ public class EPLootTables {
     }
 
     private static void addToLootTable(String targetTable, ResourceKey<LootTable> addedTable, float chance) {
-        LootTableEvents.MODIFY.register((key, tableBuilder, source, holder) -> {
+        LootTableEvents.MODIFY.register((key, tableBuilder, source, provider) -> {
             if (key.identifier().equals(EnchantmentPower.vid(targetTable)) && source.isBuiltin()) {
                 LootPool.Builder pool = LootPool.lootPool()
-                        .add(NestedLootTable.lootTableReference(addedTable))
+                        .add(NestedLootTable.lootTableReference(provider.getOrThrow(addedTable)))
                         .when(LootItemRandomChanceCondition.randomChance(chance));
                 tableBuilder.withPool(pool);
             }
@@ -54,10 +58,10 @@ public class EPLootTables {
     }
 
     private static void addToPool(String targetTable, ResourceKey<LootTable> addedTable, int weight) {
-        LootTableEvents.MODIFY.register((key, tableBuilder, source, holder) -> {
+        LootTableEvents.MODIFY.register((key, tableBuilder, source, provider) -> {
             if (key.identifier().equals(EnchantmentPower.vid(targetTable)) && source.isBuiltin()) {
                 tableBuilder.modifyPools(pool -> {
-                    pool.add(NestedLootTable.lootTableReference(addedTable).setWeight(weight));
+                    pool.add(NestedLootTable.lootTableReference(provider.getOrThrow(addedTable)).setWeight(weight));
                 });
             }
         });

@@ -7,10 +7,14 @@
                 {
                     "type": "minecraft:item",
                     "name": "minecraft:bow",
+                    "weight": 3
+                },
+                {
+                    "type": "minecraft:item",
+                    "name": "minecraft:crossbow",
                     "weight": 1
                 }
             ]
         }
-    ],
-    "functions": []
+    ]
 }

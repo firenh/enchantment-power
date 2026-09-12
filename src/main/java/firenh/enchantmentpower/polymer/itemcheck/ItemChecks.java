@@ -1,6 +1,7 @@
 package firenh.enchantmentpower.polymer.itemcheck;
 
  import eu.pb4.polymer.core.api.item.PolymerItemUtils;
+ import firenh.enchantmentpower.EnchantmentPower;
  import net.minecraft.world.item.ItemStack;
  import net.minecraft.world.item.enchantment.EnchantmentHelper;
  import net.fabricmc.fabric.impl.networking.context.PacketContextImpl;

@@ -7,31 +7,20 @@
                 {
                     "type": "minecraft:loot_table",
                     "value": "enchantmentpower:util/tiers/diamond",
-                    "weight": 4
+                    "weight": 10
                 },
                 {
                     "type": "minecraft:loot_table",
                     "value": "enchantmentpower:util/tiers/netherite",
-                    "weight":  4
+                    "weight":  5
                 },
                 {
                     "type": "minecraft:loot_table",
                     "value": "enchantmentpower:util/tiers/bow",
-                    "weight":  1
+                    "weight":  2
                 }
             ],
-            "functions": [
-                {
-                    "function": "enchantmentpower:overenchant",
-                    "total_overenchantments": {
-                        "type": "minecraft:uniform",
-                        "min": 1,
-                        "max": 2
-                    },
-                    "enchantments": "#enchantmentpower:overenchanted_soul_speed"
-                }
-            ]
+            "modifier": "enchantmentpower:overenchant_soul_speed"
         }
-    ],
-    "functions": []
+    ]
 }

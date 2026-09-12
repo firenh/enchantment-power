@@ -21,11 +21,7 @@ import java.util.Optional;
 import java.util.Set;
 
 public class EnchantmentPowerUtil {
-    public static final int CHEAP = 5;
-    public static final int INEXPENSIVE = 8;
     public static final int DEFAULT_COST = 10;
-    public static final int EXPENSIVE = 14;
-    public static final int PREMIUM = 18;
 
     public static final int DEFAULT_CAP = 40;
     public static final int MAX_CAP = 80;

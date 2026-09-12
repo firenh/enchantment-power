@@ -6,6 +6,7 @@ import java.util.Objects;
 import firenh.enchantmentpower.gamerule.EPGamerules;
 import firenh.enchantmentpower.loot.EPLootTables;
 import firenh.enchantmentpower.polymer.itemcheck.ItemChecks;
+import firenh.enchantmentpower.registry.EPDataComponents;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,6 +21,7 @@ public class EnchantmentPower implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		EPDataComponents.init();
 		ItemChecks.init();
 		EPLootTables.init();
 		EPGamerules.init();

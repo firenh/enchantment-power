@@ -8,11 +8,13 @@ package firenh.enchantmentpower.loot;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import firenh.enchantmentpower.EnchantmentPower;
 import firenh.enchantmentpower.util.EnchantingUtil;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderSet;
-import net.minecraft.core.RegistryCodecs;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.core.registries.codec.RegistryCodecs;
 import net.minecraft.tags.EnchantmentTags;
 import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.item.ItemStack;
@@ -24,62 +26,69 @@ import net.minecraft.world.level.storage.loot.functions.LootItemConditionalFunct
 import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
-import net.minecraft.world.level.storage.loot.providers.number.NumberProviders;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProvider;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
+import org.jspecify.annotations.NonNull;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
 public class OverenchantedLootItemFunction extends LootItemConditionalFunction {
     public static final MapCodec<OverenchantedLootItemFunction> MAP_CODEC = RecordCodecBuilder.mapCodec(
             (i) ->
-                    commonFields(i).and(i.group(NumberProviders.CODEC
-                            .fieldOf("total_overenchantments").forGetter((f) -> f.totalOverenchantments), RegistryCodecs.homogeneousList(Registries.ENCHANTMENT)
-                            .fieldOf("enchantments").forGetter((f) -> f.enchantments),
-                            Codec.BOOL.optionalFieldOf("include_additional_cost_component", false).forGetter((f) -> f.includeAdditionalCostComponent))).apply(i, OverenchantedLootItemFunction::new));
-    private final NumberProvider totalOverenchantments;
+                    commonFields(i).and(
+                        i.group(
+                            ContextIntProviders.CODEC
+                                .fieldOf("total_overenchantments")
+                                .forGetter((f) -> f.totalOverenchantments),
+                            RegistryCodecs.holderSet(Registries.ENCHANTMENT)
+                                .fieldOf("enchantments")
+                                .forGetter((f) -> f.enchantments),
+                            Codec.BOOL.optionalFieldOf("include_additional_cost_component", false).forGetter((f) -> f.includeAdditionalCostComponent))
+                    ).apply(i, OverenchantedLootItemFunction::new)
+    );
+    private final Holder<ContextIntProvider> totalOverenchantments;
     private final HolderSet<Enchantment> enchantments;
     private final boolean includeAdditionalCostComponent;
 
-    private OverenchantedLootItemFunction(final List<LootItemCondition> predicates, final NumberProvider levels, final HolderSet<Enchantment> enchantments, final boolean includeAdditionalCostComponent) {
-        super(predicates);
+    private OverenchantedLootItemFunction(final Optional<Holder<LootItemCondition>> condition, final Holder<ContextIntProvider> levels, final HolderSet<Enchantment> enchantments, final boolean includeAdditionalCostComponent) {
+        super(condition);
         this.totalOverenchantments = levels;
         this.enchantments = enchantments;
         this.includeAdditionalCostComponent = includeAdditionalCostComponent;
     }
 
-    public MapCodec<OverenchantedLootItemFunction> codec() {
+    public @NonNull MapCodec<OverenchantedLootItemFunction> codec() {
         return MAP_CODEC;
     }
 
-    public Set<ContextKey<?>> getReferencedContextParams() {
+    public @NonNull Set<ContextKey<?>> getReferencedContextParams() {
         return this.includeAdditionalCostComponent ? Set.of(LootContextParams.ADDITIONAL_COST_COMPONENT_ALLOWED) : Set.of();
     }
 
-    public void validate(final ValidationContext context) {
+    public void validate(final @NonNull ValidationContext context) {
         super.validate(context);
-        Validatable.validate(context, "totalOverenchantments", this.totalOverenchantments);
+        Validatable.validateHolder(context, "totalOverenchantments", this.totalOverenchantments);
     }
 
-    public ItemStack run(final ItemStack itemStack, final LootContext context) {
-        return EnchantingUtil.overenchant(context.getRandom(), itemStack.copy(), enchantments, totalOverenchantments.getInt(context));
+    public @NonNull ItemStack run(final ItemStack itemStack, final LootContext context) {
+        return EnchantingUtil.overenchant(context.getRandom(), itemStack.copy(), enchantments, totalOverenchantments.value().getInt(context));
     }
 
-    public static Builder enchantWithLevels(final HolderLookup.Provider registries, final NumberProvider levels) {
+    public static Builder enchantWithLevels(final HolderLookup.Provider registries, final Holder<ContextIntProvider> levels) {
         return (new Builder(levels)).withOptions(registries.lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(EnchantmentTags.ON_RANDOM_LOOT));
     }
 
     public static class Builder extends LootItemConditionalFunction.Builder<Builder> {
-        private final NumberProvider levels;
+        private final Holder<ContextIntProvider> levels;
         private HolderSet<Enchantment> options;
         private boolean includeAdditionalCostComponent = false;
 
-        public Builder(final NumberProvider levels) {
+        public Builder(final Holder<ContextIntProvider> levels) {
             this.levels = levels;
         }
 
-        protected Builder getThis() {
+        protected @NonNull Builder getThis() {
             return this;
         }
 
@@ -93,8 +102,8 @@ public class OverenchantedLootItemFunction extends LootItemConditionalFunction {
             return this;
         }
 
-        public LootItemFunction build() {
-            return new OverenchantedLootItemFunction(this.getConditions(), this.levels, this.options, this.includeAdditionalCostComponent);
+        public @NonNull LootItemFunction build() {
+            return new OverenchantedLootItemFunction(this.getCondition(), this.levels, this.options, this.includeAdditionalCostComponent);
         }
     }
 }

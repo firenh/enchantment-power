@@ -20,18 +20,7 @@
                     "weight": 3
                 }
             ],
-            "functions": [
-                {
-                    "function": "enchantmentpower:overenchant",
-                    "total_overenchantments": {
-                        "type": "minecraft:uniform",
-                        "min": 1,
-                        "max": 2
-                    },
-                    "enchantments": "#enchantmentpower:overenchanted"
-                }
-            ]
+            "modifier": "enchantmentpower:overenchant_standard"
         }
-    ],
-    "functions": []
+    ]
 }

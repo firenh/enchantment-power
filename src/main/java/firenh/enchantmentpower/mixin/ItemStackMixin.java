@@ -42,8 +42,8 @@ public class ItemStackMixin {
         }
     }
 
-    @Inject(at = @At("RETURN"), method = "addToTooltip")
-    public <T extends TooltipProvider> void addToTooltip(final DataComponentType<T> type, final Item.TooltipContext context, final TooltipDisplay display, final Consumer<Component> consumer, final TooltipFlag flag, CallbackInfo info) {
+    @Inject(at = @At("RETURN"), method = "addToTooltip(Lnet/minecraft/core/component/DataComponentType;Lnet/minecraft/world/item/component/TooltipProvider$Getter;Lnet/minecraft/world/item/Item$TooltipContext;Lnet/minecraft/world/item/component/TooltipDisplay;Ljava/util/function/Consumer;Lnet/minecraft/world/item/TooltipFlag;)V")
+    public <T extends TooltipProvider> void addToTooltip(DataComponentType<T> type, TooltipProvider.Getter<T> tooltipGetter, Item.TooltipContext context, TooltipDisplay display, Consumer<Component> consumer, TooltipFlag flag, CallbackInfo ci) {
         if (type.equals(DataComponents.ENCHANTMENTS)) {
             TooltipUtil.appendTooltip( ((ItemStack)(Object)this), context, consumer);
         }

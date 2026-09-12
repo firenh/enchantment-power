@@ -17,7 +17,7 @@ public class AnvilScreenHandlerMixin {
 		return Integer.MAX_VALUE;
 	}
 
-    @Inject(at = @At("RETURN"), method = "createResult", cancellable = true)
+    @Inject(at = @At("RETURN"), method = "createResult")
     public void updateResult(CallbackInfo info) {
         AnvilUtil.updateAnvilResult((AnvilMenu)(Object)this);
     }

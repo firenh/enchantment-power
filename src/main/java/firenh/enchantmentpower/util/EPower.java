@@ -1,8 +1,7 @@
 package firenh.enchantmentpower.util;
 
 import com.mojang.datafixers.util.Pair;
-import firenh.enchantmentpower.config.ConfigGetter;
-import firenh.enchantmentpower.registry.EPEnchantmentTags;
+import firenh.enchantmentpower.registry.EPDataComponents;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
@@ -63,6 +62,9 @@ public class EPower {
         }
 
         maxPower = EnchantmentPowerUtil.getCapFromTag(itemStack);
+
+        itemStack.set(EPDataComponents.ENCHANTMENT_POWER, power);
+        itemStack.set(EPDataComponents.ENCHANTMENT_POWER_RATIO, ((float) power) / ((float) maxPower));
 
         return new EPower(power, maxPower, cursesPresent);
     }

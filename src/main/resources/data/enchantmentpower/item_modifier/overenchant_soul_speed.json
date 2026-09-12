@@ -1,0 +1,9 @@
+{
+    "type": "enchantmentpower:overenchant",
+    "total_overenchantments": {
+        "type": "minecraft:uniform",
+        "min": 1,
+        "max": 2
+    },
+    "enchantments": "#enchantmentpower:overenchanted_soul_speed"
+}

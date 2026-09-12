@@ -22,8 +22,4 @@ public class MiscUtil {
 
         return newList;
     }
-
-    public static void test(String[] args) {
-        List<Integer> testList = Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 6, 7, 8});
-    }
 }

@@ -8,17 +8,16 @@ import java.util.stream.Stream;
 
 import com.mojang.datafixers.util.Pair;
 import firenh.enchantmentpower.EnchantmentPower;
+import firenh.enchantmentpower.registry.EPDataComponents;
 import firenh.enchantmentpower.registry.EPEnchantmentTags;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
+import net.minecraft.tags.EnchantmentTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.EnchantmentInstance;
-import net.minecraft.world.item.enchantment.ItemEnchantments;
+import net.minecraft.world.item.enchantment.*;
 
 public class EnchantingUtil {
     public static List<EnchantmentInstance> generateEnchantments(List<EnchantmentInstance> list, int level, ItemStack itemStack) {
@@ -74,7 +73,7 @@ public class EnchantingUtil {
         List<Holder<Enchantment>> enchList = new ArrayList<>();
 
         for (Holder<Enchantment> e : enchantments) {
-            enchList.add(e);
+            if (!e.is(EnchantmentTags.CURSE)) enchList.add(e);
         }
 
         List<Holder<Enchantment>> shuffledList = MiscUtil.shuffleList(enchList, random);
@@ -91,6 +90,8 @@ public class EnchantingUtil {
 
 
         itemStack.set(EnchantmentHelper.getComponentType(itemStack), itemEnchantments.toImmutable());
+        itemStack.set(EPDataComponents.HAS_OVERENCHANTMENTS, true);
+
         return itemStack;
     }
 

@@ -6,10 +6,10 @@
         "AnvilScreenHandlerAccessor",
         "AnvilScreenHandlerMixin",
         "EnchantmentHelperMixin",
+        "EnchantmentMenuAnonymousLapisSlotMixin",
         "EnchantmentMixin",
         "EnchantmentScreenHandlerMixin",
         "ForgingScreenHandlerAccessor",
-        "ItemEnchantmentsComponentMixin",
         "ItemStackMixin",
         "LootItemFunctionsMixin",
         "PlayerMixin"
