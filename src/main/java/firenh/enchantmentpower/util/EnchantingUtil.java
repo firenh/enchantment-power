@@ -18,7 +18,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.*;
-import org.apache.commons.compress.utils.Lists;
 
 public class EnchantingUtil {
     public static List<EnchantmentInstance> generateEnchantments(List<EnchantmentInstance> list, int level, ItemStack itemStack) {
@@ -99,7 +98,7 @@ public class EnchantingUtil {
     }
 
     private static List<Holder<Enchantment>> addExtraWeightedEntries(List<Holder<Enchantment>> originalList) {
-        ArrayList<Holder<Enchantment>> newList = Lists.newArrayList();
+        ArrayList<Holder<Enchantment>> newList = new ArrayList<>();
 
         for (Holder<Enchantment> enchantment : originalList) {
             int weight = enchantment.value().getWeight();
