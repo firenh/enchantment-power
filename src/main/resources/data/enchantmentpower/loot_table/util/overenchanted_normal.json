@@ -12,12 +12,17 @@
                 {
                     "type": "minecraft:loot_table",
                     "value": "enchantmentpower:util/tiers/diamond",
-                    "weight":  8
+                    "weight":  10
                 },
                 {
                     "type": "minecraft:loot_table",
                     "value": "enchantmentpower:util/tiers/bow",
-                    "weight": 3
+                    "weight": 4
+                },
+                {
+                    "type": "minecraft:loot_table",
+                    "value": "enchantmentpower:util/tiers/golden",
+                    "weight":  1
                 }
             ],
             "modifier": "enchantmentpower:overenchant_standard"

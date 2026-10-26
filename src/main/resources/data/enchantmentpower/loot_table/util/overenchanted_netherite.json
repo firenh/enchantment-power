@@ -18,6 +18,11 @@
                     "type": "minecraft:loot_table",
                     "value": "enchantmentpower:util/tiers/bow",
                     "weight":  2
+                },
+                {
+                    "type": "minecraft:loot_table",
+                    "value": "enchantmentpower:util/tiers/golden",
+                    "weight":  1
                 }
             ],
             "modifier": "enchantmentpower:overenchant_soul_speed"
