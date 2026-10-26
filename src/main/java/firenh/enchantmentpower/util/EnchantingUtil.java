@@ -102,14 +102,14 @@ public class EnchantingUtil {
 
         for (Holder<Enchantment> enchantment : originalList) {
             int weight = enchantment.value().getWeight();
-            EnchantmentPower.LOGGER.info("Weight: {}", weight);
+//            EnchantmentPower.LOGGER.info("Weight: {}", weight);
 
             for (int i = 0; i < weight; i += 1) {
                 newList.add(enchantment);
             }
         }
 
-        EnchantmentPower.LOGGER.info("List Size: {}", newList.size());
+//        EnchantmentPower.LOGGER.info("List Size: {}", newList.size());
         return newList;
     }
 

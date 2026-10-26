@@ -17,7 +17,7 @@ import net.minecraft.resources.Identifier;
 public class EnchantmentPower implements ModInitializer {
 	public static final String MODID = "enchantmentpower";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MODID);
-	public static final String MOD_VERSION = "0.0.0";
+	public static final String MOD_VERSION = "0.1.4";
 
 	@Override
 	public void onInitialize() {
