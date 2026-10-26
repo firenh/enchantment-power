@@ -18,6 +18,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.*;
+import org.apache.commons.compress.utils.Lists;
 
 public class EnchantingUtil {
     public static List<EnchantmentInstance> generateEnchantments(List<EnchantmentInstance> list, int level, ItemStack itemStack) {
@@ -76,7 +77,9 @@ public class EnchantingUtil {
             if (!e.is(EnchantmentTags.CURSE)) enchList.add(e);
         }
 
-        List<Holder<Enchantment>> shuffledList = MiscUtil.shuffleList(enchList, random);
+        List<Holder<Enchantment>> shuffledList = MiscUtil.shuffleList(
+            addExtraWeightedEntries(enchList),
+        random);
 
         ItemEnchantments.Mutable itemEnchantments = new ItemEnchantments.Mutable(itemStack.getEnchantments());
         final int intendedCap = EnchantmentPowerUtil.getCapFromTag(itemStack);
@@ -93,6 +96,22 @@ public class EnchantingUtil {
         itemStack.set(EPDataComponents.HAS_OVERENCHANTMENTS, true);
 
         return itemStack;
+    }
+
+    private static List<Holder<Enchantment>> addExtraWeightedEntries(List<Holder<Enchantment>> originalList) {
+        ArrayList<Holder<Enchantment>> newList = Lists.newArrayList();
+
+        for (Holder<Enchantment> enchantment : originalList) {
+            int weight = enchantment.value().getWeight();
+            EnchantmentPower.LOGGER.info("Weight: {}", weight);
+
+            for (int i = 0; i < weight; i += 1) {
+                newList.add(enchantment);
+            }
+        }
+
+        EnchantmentPower.LOGGER.info("List Size: {}", newList.size());
+        return newList;
     }
 
     private  static int currentPower(ItemEnchantments.Mutable entrySet) {
@@ -117,7 +136,9 @@ public class EnchantingUtil {
             if (
                     !enchantment.isSupportedItem(itemStack)
                     || itemStack.getEnchantments().keySet().contains(enchHolder)
-            ) continue;
+            ) {
+                continue;
+            }
 
             for (Holder<Enchantment> e : itemEnchantments.toImmutable().keySet()) {
                 if (!Enchantment.areCompatible(e, enchHolder)) continue outerloop;
